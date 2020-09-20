@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as http from 'http';
 import * as swaggerUi from 'swagger-ui-express';
-import HomeRouter from './HomeRouter';
+import UserRouter from './UserRouter';
 //import authenticate from '../config/middleware/oAuth';
 let swaggerDoc: Object;
 
@@ -34,7 +34,7 @@ export function init(app: express.Application): void {
      * @description Forwards any requests to the /auth URI to our AuthRouter
      * @constructs
      */
-    app.use('/home', HomeRouter);
+    app.use('/home', UserRouter);
 
     /**
      * @description

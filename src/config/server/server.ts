@@ -1,5 +1,5 @@
 import express from 'express';
-//import * as Middleware from '../middleware/middleware';
+import * as Middleware from '../interceptors/middleware';
 import * as Routes from '../../api';
 
 /**
@@ -20,7 +20,7 @@ Routes.init(app);
 /**
  * @constructs express.Application Error Handler
  */
-//Middleware.initErrorHandler(app);
+Middleware.initErrorHandler(app);
 
 /**
  * sets port 3000 to default or unless otherwise specified in the environment

@@ -33,8 +33,8 @@ export function onError(error: NodeJS.ErrnoException, port: number | string | bo
  * @export onListening
  */
 export function onListening(): void {
-    //const addr: Address = this.address();
-    //const bind: string = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
+    /* const addr: Address = this.address();
+    const bind: string = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
 
-    //debug(`Listening on ${bind}`);
+    console.log(`Listening on ${bind}`); */
 }
