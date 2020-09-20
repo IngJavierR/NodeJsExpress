@@ -1,0 +1,66 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Node-Typescript API",
+    "version": "1.0.0",
+    "description": "A sample API"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/home/ping/": {
+      "post": {
+        "description": "sign up user to application",
+        "tags": [
+          "home"
+        ],
+        "requestBody": {
+          "description": "sign up body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSchema"
+              },
+              "example": {
+                "email": "test.user@mail.com",
+                "password": "test_test"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "user successfuly signed in",
+            "content": {
+              "appication/json": {
+                "example": {
+                  "status": 200,
+                  "logged": true,
+                  "message": "Sign in successfull!!"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "sign in failed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 400,
+                  "logged": false,
+                  "message": "Email already exists"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}

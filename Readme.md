@@ -32,7 +32,14 @@ npm run tsc
 Levantar el servicio:  
 
 ```bash  
-node server/server.js
+node ./build/config/server/index.js
+```
+
+## Swagger  
+
+```bash
+npm install -g swagger-jsdoc
+swagger-jsdoc -d swaggerDef.js -o swagger.json
 ```
 
 ## Contributors
