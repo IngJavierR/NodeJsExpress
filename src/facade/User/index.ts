@@ -1,6 +1,6 @@
 import UserFacade from './facade';
-import { HttpError } from '../../config/error';
 import { NextFunction, Request, Response } from 'express';
+import HttpStatusCode from '../../commons/constants/HttpStatusCode';
 
 /**
  * @export
@@ -12,9 +12,8 @@ import { NextFunction, Request, Response } from 'express';
 export async function findAll(req: Request, res: Response, next: NextFunction): Promise < void > {
     try {
         const users: any[] = await UserFacade.findAll();
-        res.status(200).json(users);
+        res.status(HttpStatusCode.OK).json(users);
     } catch (error) {
-        console.log("ErrorFindAl");
-        next(new HttpError(error.message.status, error.message));
+        next(error);
     }
 }

@@ -1,31 +1,102 @@
 import * as http from 'http';
-import { NextFunction, Request, Response } from 'express';
+import HttpStatusCode from '../../commons/constants/HttpStatusCode';
 
 /**
  * @export
- * @class HttpError
+ * @class ParametersError
  * @extends {Error}
  */
-export class HttpError extends Error {
+export class ParametersError extends Error {
     status: number;
     message: string;
-    //name: 'HttpError';
 
     /**
      * Creates an instance of HttpError.
      * @param {number} [status]
      * @param {string} [message]
-     * @memberof HttpError
+     * @memberof ParametersError
      */
-    constructor(status ? : number, message ? : string) {
+    constructor(message: string, status ? : number) {
         super(message);
 
         Error.captureStackTrace(this, this.constructor);
 
-        this.status = status || 500;
-        //this.name = this.name;
+        this.status = status || HttpStatusCode.BAD_REQUEST;
         this.message = message || http.STATUS_CODES[this.status] || 'Error';
     }
 }
 
-export default HttpError;
+/**
+ * @export
+ * @class UnauthorizedError
+ * @extends {Error}
+ */
+export class UnauthorizedError extends Error {
+    status: number;
+    message: string;
+
+    /**
+     * Creates an instance of HttpError.
+     * @param {number} [status]
+     * @param {string} [message]
+     * @memberof ParametersError
+     */
+    constructor(message: string, status ? : number) {
+        super(message);
+
+        Error.captureStackTrace(this, this.constructor);
+
+        this.status = status || HttpStatusCode.UNAUTHORIZED;
+        this.message = message || http.STATUS_CODES[this.status] || 'Error';
+    }
+}
+
+/**
+ * @export
+ * @class ForbiddenError
+ * @extends {Error}
+ */
+export class ForbiddenError extends Error {
+    status: number;
+    message: string;
+
+    /**
+     * Creates an instance of HttpError.
+     * @param {number} [status]
+     * @param {string} [message]
+     * @memberof ParametersError
+     */
+    constructor(message: string, status ? : number) {
+        super(message);
+
+        Error.captureStackTrace(this, this.constructor);
+
+        this.status = status || HttpStatusCode.FORBIDDEN;
+        this.message = message || http.STATUS_CODES[this.status] || 'Error';
+    }
+}
+
+/**
+ * @export
+ * @class NotFoundError
+ * @extends {Error}
+ */
+export class NotFoundError extends Error {
+    status: number;
+    message: string;
+
+    /**
+     * Creates an instance of HttpError.
+     * @param {number} [status]
+     * @param {string} [message]
+     * @memberof ParametersError
+     */
+    constructor(message: string, status ? : number) {
+        super(message);
+
+        Error.captureStackTrace(this, this.constructor);
+
+        this.status = status || HttpStatusCode.NOT_FOUND;
+        this.message = message || http.STATUS_CODES[this.status] || 'Error';
+    }
+}

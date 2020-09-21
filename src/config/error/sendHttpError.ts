@@ -1,4 +1,3 @@
-import { HttpError } from './index';
 import { NextFunction, Request } from 'express';
 
 /**
@@ -25,17 +24,17 @@ import { NextFunction, Request } from 'express';
  *          description: Error description
  *          example: User created
  */
-export function sendHttpErrorModule(req: Request, res: any, next: NextFunction): void {
+/* export function sendHttpErrorModule(req: Request, res: any, next: NextFunction): void {
     res.sendHttpError = (error: HttpError): void => {
         console.log('sendHttpErrorModule');
-        res.status(error.status);
+        res.status(error.status);*/
 
         /**
          * if this looks like an AJAX request
          * if this request has a "json" content-type AND ALSO has its "Accept" header set
          * if this request DOESN'T explicitly want HTML
          */
-        if (
+        /*if (
             req.xhr ||
             req.is('json') ||
             (req.is('json') && req.get('Accept')) ||
@@ -52,7 +51,7 @@ export function sendHttpErrorModule(req: Request, res: any, next: NextFunction):
     };
 
     next();
-}
+} */
 
 /**
  * 
@@ -60,7 +59,7 @@ export function sendHttpErrorModule(req: Request, res: any, next: NextFunction):
  * @returns {string} HTML response or empty string
  * @description generates HTML for response
  */
-const generateHTML: Function = (error: HttpError): string => {
+/*const generateHTML: Function = (error: HttpError): string => {
     if (error) {
         return '<div style=\'text-align: center;\'>' +
             `<p>Status: ${error.status}</p>` +
@@ -70,5 +69,5 @@ const generateHTML: Function = (error: HttpError): string => {
     }
 
     return '';
-};
+};*/
 

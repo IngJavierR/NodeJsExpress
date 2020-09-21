@@ -4,8 +4,10 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import * as express from 'express';
 import helmet from 'helmet';
-import { HttpError } from '../error/index';
-import { sendHttpErrorModule } from '../error/sendHttpError';
+import HttpStatusCode from '../../commons/constants/HttpStatusCode';
+import { ErrorTo } from '../../to/ErrorTo';
+import { ParametersError, UnauthorizedError, ForbiddenError, NotFoundError } from '../error';
+//import { sendHttpErrorModule } from '../error/sendHttpError';
 /**
  * @export
  * @param {express.Application} app
@@ -26,7 +28,7 @@ export function configure(app: express.Application): void {
     app.use(cors());
 
     // custom errors
-    app.use(sendHttpErrorModule);
+    //app.use(sendHttpErrorModule);
 
     // cors
     app.use((req, res, next) => {
@@ -43,53 +45,21 @@ export function configure(app: express.Application): void {
     });
 }
 
-interface CustomResponse extends express.Response {
-    sendHttpError: (error: HttpError | Error, message ? : string) => void;
-}
-
 /**
  * @export
  * @param {express.Application} app
  */
 export function initErrorHandler(app: express.Application): void {
-    app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        console.error('ErrorHandler');
-        if (typeof error === 'number') {
-            error = new HttpError(error); // next(404)
-        }
+    app.use((error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
 
-        if (error instanceof HttpError) {
-            res.send(error);
-        } else {
-            if (app.get('env') === 'development') {
-                error = new HttpError(500, error.message);
-                res.send(error);
-            } else {
-                error = new HttpError(500);
-                res.send(error);
-            }
+        console.error(`[Error] - Message: [${error.message}]\nStack: [${error.stack||''}]`);
+        let errorTo = new ErrorTo('0', error.status, error.message, '');
+        if (error instanceof ParametersError || error instanceof UnauthorizedError || 
+            error instanceof ForbiddenError || error instanceof NotFoundError) {
+            res.status(error.status).send(errorTo);
+        }else{
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(errorTo);
         }
-
-        console.error('ErrorI', error);
+        
     });
-    
-    /* app.use((error: Error, req: express.Request, res: CustomResponse, next: express.NextFunction) => {
-        if (typeof error === 'number') {
-            error = new HttpError(error); // next(404)
-        }
-
-        if (error instanceof HttpError) {
-            res.sendHttpError(error);
-        } else {
-            if (app.get('env') === 'development') {
-                error = new HttpError(500, error.message);
-                res.sendHttpError(error);
-            } else {
-                error = new HttpError(500);
-                res.sendHttpError(error, error.message);
-            }
-        }
-
-        console.error(error);
-    }); */
 }

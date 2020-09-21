@@ -1,5 +1,5 @@
 import { IUserFacade } from "./interface";
-
+import { ParametersError } from '../../config/error';
 /**
  * @export
  * @implements {IUserModelService}
@@ -10,14 +10,8 @@ const UserFacade: IUserFacade = {
      * @memberof UserFacade
      */
     async findAll(): Promise<any[]> {
-        try {
-            console.log('FindAll');
-            throw new Error('Error desconocido');
-            return [1,2,3];
-        } catch (error) {
-            console.log('ErrorP', error);
-            throw new Error(error.message);
-        }
+        throw new ParametersError('Error desconocido');
+        //return [1,2,3];
     }
 }
 
