@@ -1,10 +1,7 @@
 import express from 'express';
 import * as Middleware from '../interceptors/middleware';
 import * as Routes from '../../api';
-import {Sequelize} from 'sequelize-typescript';
-import config from '../env/index';
-import User from '../../models/user.model';
-import { sequelize } from '../../database';
+import { db } from '../connection/database';
 
 /**
  * @constant {express.Application}
@@ -22,11 +19,10 @@ const app: express.Application = express();
 Routes.init(app);
 
 // initialize db
-sequelize.authenticate()
+db.authenticate()
 .then(() => {
     console.log('Connected to Database');
-    sequelize.sync({force: true});
-    //db.addModels(User);
+    db.sync({force: true});
 })
 .catch(err => console.error('Error connecting database', err))
 
