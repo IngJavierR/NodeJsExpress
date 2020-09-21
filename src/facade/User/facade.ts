@@ -1,5 +1,7 @@
 import { IUserFacade } from "./interface";
-import { ParametersError } from '../../config/error';
+import User from "../../models/user.model";
+
+
 /**
  * @export
  * @implements {IUserModelService}
@@ -10,7 +12,11 @@ const UserFacade: IUserFacade = {
      * @memberof UserFacade
      */
     async findAll(): Promise<any[]> {
-        throw new ParametersError('Error desconocido');
+
+        let users = await User.findAll();
+        console.log('Users', users);
+        return users;
+        //throw new UnauthorizedError('Error desconocido');
         //return [1,2,3];
     }
 }

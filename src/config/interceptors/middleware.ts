@@ -53,11 +53,12 @@ export function initErrorHandler(app: express.Application): void {
     app.use((error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
 
         console.error(`[Error] - Message: [${error.message}]\nStack: [${error.stack||''}]`);
-        let errorTo = new ErrorTo('0', error.status, error.message, '');
         if (error instanceof ParametersError || error instanceof UnauthorizedError || 
             error instanceof ForbiddenError || error instanceof NotFoundError) {
+            let errorTo = new ErrorTo('0', error.status.toString(), error.message, '');
             res.status(error.status).send(errorTo);
         }else{
+            let errorTo = new ErrorTo('0', error.message, 'Ocurrió un error inesperado', '');
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(errorTo);
         }
         

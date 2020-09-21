@@ -5,8 +5,11 @@ dotenv.config();
 interface IConfig {
     port: string | number;
     database: {
-        POSTGRESQL_URI: string;
-        POSTGRESQL_DB: string;
+        DB_NAME: string;
+        DB_USER: string;
+        DB_PASSWORD: string;
+        DB_PORT: string;
+        DB_HOST: string;
     };
     secret: string;
 }
@@ -16,8 +19,11 @@ const NODE_ENV: string = process.env.NODE_ENV || 'development';
 const development: IConfig = {
     port: process.env.PORT || 3000,
     database: {
-        POSTGRESQL_URI: process.env.POSTGRESQL_URI || 'POSTGRESQL://localhost:27017/',
-        POSTGRESQL_DB: process.env.POSTGRESQL_DB || 'users_db'
+        DB_NAME: process.env.DB_NAME || 'project',
+        DB_USER: process.env.DB_USER || 'postgres',
+        DB_PASSWORD: process.env.DB_PASSWORD || 'project123',
+        DB_PORT: process.env.DB_PORT || '5432',
+        DB_HOST: process.env.DB_HOST || 'localhost'
     },
     secret: process.env.SECRET || '@QEGTUI'
 };
@@ -25,8 +31,11 @@ const development: IConfig = {
 const production: IConfig = {
     port: process.env.PORT || 3000,
     database: {
-        POSTGRESQL_URI: process.env.POSTGRESQL_URI || 'POSTGRESQL://production_uri/',
-        POSTGRESQL_DB: process.env.POSTGRESQL_DB || 'users_db'
+        DB_NAME: process.env.DB_NAME || 'project',
+        DB_USER: process.env.DB_USER || 'postgres',
+        DB_PASSWORD: process.env.DB_PASSWORD || 'project123',
+        DB_PORT: process.env.DB_PORT || '5432',
+        DB_HOST: process.env.DB_HOST || 'localhost'
     },
     secret: process.env.SECRET || '@QEGTUI'
 };
@@ -34,8 +43,11 @@ const production: IConfig = {
 const test: IConfig = {
     port: process.env.PORT || 3000,
     database: {
-        POSTGRESQL_URI: process.env.POSTGRESQL_URI || 'POSTGRESQL://localhost:27017',
-        POSTGRESQL_DB: 'test_users_db'
+        DB_NAME: process.env.DB_NAME || 'project',
+        DB_USER: process.env.DB_USER || 'postgres',
+        DB_PASSWORD: process.env.DB_PASSWORD || 'project123',
+        DB_PORT: process.env.DB_PORT || '5432',
+        DB_HOST: process.env.DB_HOST || 'localhost'
     },
     secret: process.env.SECRET || '@QEGTUI'
 };
