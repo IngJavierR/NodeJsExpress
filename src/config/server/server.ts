@@ -22,7 +22,7 @@ Routes.init(app);
 db.authenticate()
 .then(() => {
     console.log('Connected to Database');
-    db.sync({force: true});
+    db.sync();
 })
 .catch(err => console.error('Error connecting database', err))
 

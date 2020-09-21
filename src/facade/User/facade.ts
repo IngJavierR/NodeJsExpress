@@ -1,5 +1,5 @@
+import { UserService } from "../../services";
 import { IUserFacade } from "./interface";
-import User from "../../models/user.model";
 
 
 /**
@@ -13,8 +13,7 @@ const UserFacade: IUserFacade = {
      */
     async findAll(): Promise<any[]> {
 
-        let users = await User.findAll();
-        console.log('Users', users);
+        let users = await UserService.findAll();
         return users;
         //throw new UnauthorizedError('Error desconocido');
         //return [1,2,3];
