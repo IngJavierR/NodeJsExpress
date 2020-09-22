@@ -13,10 +13,10 @@ const UserFacade: IUserFacade = {
      */
     async findAll(): Promise<any[]> {
 
-        let users = await UserService.findAll();
-        return users;
+        //let users = await UserService.findAll();
+        //return users;
         //throw new UnauthorizedError('Error desconocido');
-        //return [1,2,3];
+        return [1,2,3];
     }
 }
 
