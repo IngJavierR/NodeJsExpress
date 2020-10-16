@@ -1,16 +1,33 @@
+process.env.NODE_ENV = 'test'
+
 import { expect } from "chai";
-import { stubInterface } from "ts-sinon";
-import {IUserService} from '../../src/services/User/interface';
+import { UserService } from "../../src/services";
+import { db } from '../../src/config/connection/database';
+import User from "../../src/models/user.model";
 
-describe('bar', () => {
-    it('sync function returns true', async () => {
+describe('UserService Test', () => {
 
-        const iUserService = stubInterface<IUserService>();
-        iUserService.findAll.returns(new Promise((r,q)=> {
-            r([1,2,3])
-        }));
-
-        const users: any[] = await iUserService.findAll();
-        expect(3).equal(users.length);
+  before('Init', async() => {
+    await db.sync({ force: true});
+    User.create({
+      id: 1,
+      name: 'test',
+      createdAt: '2020-01-01',
+      updatedAt: '2020-01-01'
     });
+    User.create({
+      id: 2,
+      name: 'test2',
+      createdAt: '2020-01-01',
+      updatedAt: '2020-01-01'
+    });
+  });
+
+  describe('FindAll', async() => {
+    it('should return one user', async () => {
+      const users: any[] = await UserService.findAll();
+      expect(2).equal(users.length);
+    });
+  });
+
 });

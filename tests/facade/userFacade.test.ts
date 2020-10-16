@@ -1,16 +1,26 @@
+process.env.NODE_ENV = 'test'
+
 import { expect } from "chai";
-import { stubInterface } from "ts-sinon";
-import {IUserFacade} from '../../src/facade/User/interface';
+import UserFacade from '../../src/facade/User/facade';
+import { db } from '../../src/config/connection/database';
+import User from "../../src/models/user.model";
 
-describe('bar', () => {
-    it('sync function returns true', async () => {
+describe('UserFacade Test', () => {
 
-        const iUserFacade = stubInterface<IUserFacade>();
-        iUserFacade.findAll.returns(new Promise((r,q)=> {
-            r([1,2,3])
-        }));
-
-        const users: any[] = await iUserFacade.findAll();
-        expect(3).equal(users.length);
+    before('Init', async() => {
+        await db.sync({ force: true});
+        User.create({
+        id: 1,
+        name: 'test',
+        createdAt: '2020-01-01',
+        updatedAt: '2020-01-01'
+        });
+    });
+  
+    describe('FindAll', () => {
+        it('should return one user', async () => {
+            const users: any[] = await UserFacade.findAll();
+            expect(1).equal(users.length);
+        });
     });
 });

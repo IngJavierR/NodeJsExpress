@@ -35,6 +35,18 @@ Levantar el servicio:
 node ./build/config/server/index.js
 ```
 
+Ejecutar pruebas unitarias:  
+
+```bash  
+npm test
+```
+
+Mostrar cobertura:  
+
+```bash  
+npm run coverage
+```
+
 ## Swagger  
 
 ```bash
@@ -42,7 +54,23 @@ npm install -g swagger-jsdoc
 swagger-jsdoc -d swaggerDef.js -o swagger.json
 ```
 
+## Sonar
+
+Incluir la cobertura de pruebas unitarias en Sonar
+
+```bash
+sonar-scanner \
+	 -Dsonar.projectKey=<Nombre del proyecto> \
+	 -Dsonar.sources=src \
+	 -Dsonar.coverage.exclusions=src/api/**,src/commons/**,src/config/**,src/models/**,src/to/**,src/facade/index.ts,src/facade/**/index.ts \
+	 -Dsonar.host.url=<Sonar Host> \
+	 -Dsonar.login=<Sonar Token> \
+	 -Dsonar.sourceEncoding=UTF-8 \
+	 -Dsonar.tests=tests \
+	 -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+```
+
 ## Contributors
 
 Javier RodrÃ­guez  
-[francisco.rodriguez@axity.com]  
+[hazelapd@gmail.com]  

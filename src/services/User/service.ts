@@ -12,9 +12,7 @@ const UserService: IUserService = {
      * @memberof UserFacade
      */
     async findAll(): Promise<any[]> {
-
-        let users = await User.findAll();
-        return users;
+        return User.findAll();
     }
 }
 
