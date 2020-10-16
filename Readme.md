@@ -72,5 +72,5 @@ sonar-scanner \
 
 ## Contributors
 
-Javier RodrÃ­guez  
+Javier Rodrí­guez  
 [hazelapd@gmail.com]  
