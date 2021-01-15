@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as http from 'http';
 import * as swaggerUi from 'swagger-ui-express';
 import UserRouter from './UserRouter';
+import cors from 'cors';
 //import authenticate from '../config/middleware/oAuth';
 let swaggerDoc: Object;
 
@@ -22,6 +23,18 @@ try {
 export function init(app: express.Application): void {
     const router: express.Router = express.Router();
 
+    /**
+     * 
+     */
+    app.use(cors({​​​​​
+        optionsSuccessStatus: 200
+    }​​​​​))
+
+    /**
+     * middlewares
+     */
+    app.use(express.json({limit: '50mb'}));
+    app.use(express.urlencoded({ extended: false, limit: '50mb' }));
     /**
      * @description
      *  Forwards any requests to the /v1/users URI to our UserRouter

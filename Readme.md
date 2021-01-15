@@ -32,7 +32,7 @@ npm run tsc
 Levantar el servicio:  
 
 ```bash  
-node ./build/config/server/index.js
+node ./build/src/config/server/index.js
 ```
 
 Ejecutar pruebas unitarias:  
